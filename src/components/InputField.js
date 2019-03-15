@@ -8,8 +8,12 @@ class InputField extends React.Component {
   handleKeyDown = (e) => {
     
     if (e.keyCode === 13) {
+       
         const temp=this.state.tasks;
-        temp[temp.length]=e.target.value;
+
+        temp.push({text: e.target.value, selected: false});
+;        console.log("temp",temp);
+    
         this.setState({ 
             myValue: e.target.value,
             tasks: temp,
@@ -19,16 +23,13 @@ class InputField extends React.Component {
         
     }
   }
-  onBtnClickHandler = (e) => {
-      alert(this.state.myValue);
-  }
+  
   render() {
       return (
       <React.Fragment>
-          <input
-            className='field'
-            onKeyDown={this.handleKeyDown}
-            placeholder='Your text' />
+          {/* <div className="bd-highlight"> */}
+          <input className='field' onKeyDown={this.handleKeyDown} placeholder='Your text' />
+          {/* </div> */}
       </React.Fragment>
       )
   }

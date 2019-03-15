@@ -6,24 +6,34 @@ import Footer from './components/Footer'
 
 class App extends Component {
     state = {
-        tasks: [],
+        tasks: []
     }
 
     updateData = (value) => {
-        
-        
         this.setState({ tasks: value })
      }
+    
+
+     updateSelectedElement = (key, checked) => {
+       
+        const a = this.state.tasks;
+        console.log('a',key);
+        a[key].selected=checked;
+        this.setState({
+          tasks: a,
+      }
+      )
+   }
 
     render() {
-        console.log(this.state.tasks.length);
+        
         
             return (
                 
-                <div className="App">
+                <div className="smallContainer">
                   <InputField updateData={this.updateData}/>
-                  <TodoList data={this.state.tasks}/>
-                  {this.state.tasks.length!==0 && <Footer/>}
+                  <TodoList data={this.state.tasks} updateSelectedElement={this.updateSelectedElement}/>
+                  {this.state.tasks.length!==0 && <Footer count={this.state.tasks.length} className="bd-highlight"/>}
                 </div>
               );
         
