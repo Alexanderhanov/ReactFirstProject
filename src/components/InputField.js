@@ -12,7 +12,7 @@ class InputField extends React.Component {
         const temp=this.state.tasks;
 
         temp.push({text: e.target.value, selected: false});
-;        console.log("temp",temp);
+;       
     
         this.setState({ 
             myValue: e.target.value,

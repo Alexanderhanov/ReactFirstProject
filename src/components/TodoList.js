@@ -7,10 +7,12 @@ class TodoList extends Component {
   }
 
   render() {
+    let filterArray = []
+
     
     const array = this.props.data.map((item, index) => {
         
-        return <Ticket updateSelectedElement={this.props.updateSelectedElement} text={item.text} selected={item.selected} key={index}/>
+        return <Ticket updateSelectedElement={this.props.updateSelectedElement} text={item.text} selected={item.selected} keyItem={index}/>
         
       })
     

@@ -8,16 +8,12 @@ class Ticket extends React.Component{
             selected: false,
         }
     }
-    
 
     selectedStateChanged = () => {
-        const s=!this.state.selected;
-
-        this.setState({
-            selected: s,
-        });
-        console.log('key',this.props);
-        //this.props.updateSelectedElement(this.props.key, this.state.selected);
+        
+        console.log("s1",JSON.stringify(this.state.selected));
+        this.props.updateSelectedElement(this.props.keyItem, !this.state.selected);
+        this.setState({selected: !this.state.selected});
        
     }
 

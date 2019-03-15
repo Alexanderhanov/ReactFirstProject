@@ -6,7 +6,10 @@ import Footer from './components/Footer'
 
 class App extends Component {
     state = {
-        tasks: []
+      
+        tasks: [],
+        buff: [],
+        currentTab: 1
     }
 
     updateData = (value) => {
@@ -14,26 +17,63 @@ class App extends Component {
      }
     
 
-     updateSelectedElement = (key, checked) => {
+    updateSelectedElement = (key, checked) => {
        
-        const a = this.state.tasks;
-        console.log('a',key);
+        let a = this.state.tasks;
+        
         a[key].selected=checked;
         this.setState({
           tasks: a,
-      }
-      )
-   }
+        })
+        if (checked){
+
+        }
+    }
+
+    justActiveFilter=() =>{
+      let temp=[];
+        this.state.tasks.forEach(element => {
+          
+          if (element.selected){temp.push(element)}
+        });
+
+        this.setState({
+          currentTab: 2,
+          buff: temp
+        })
+        console.log(temp);
+    }
+
+    justCompletedFilter=() =>{
+      let temp=[];
+      this.state.tasks.forEach(element => {
+        
+        if (!element.selected){temp.push(element)}
+      });
+
+      this.setState({
+        currentTab: 3,
+        buff: temp
+      })
+      console.log(temp);
+    }
+
+    all=() =>{
+      this.setState({
+        currentTab: 1,
+        
+      })
+    }
 
     render() {
-        
-        
+            console.log("buff", this.state.buff);
+            
             return (
                 
                 <div className="smallContainer">
                   <InputField updateData={this.updateData}/>
-                  <TodoList data={this.state.tasks} updateSelectedElement={this.updateSelectedElement}/>
-                  {this.state.tasks.length!==0 && <Footer count={this.state.tasks.length} className="bd-highlight"/>}
+                  <TodoList data={this.state.currentTab===1 ? this.state.tasks : this.state.buff} updateSelectedElement={this.updateSelectedElement}/>
+                  {this.state.tasks.length!==0 && <Footer count={this.state.tasks.length} className="bd-highlight" justActiveFilter={this.justActiveFilter} justCompletedFilter={this.justCompletedFilter} all={this.all}/>}
                 </div>
               );
         
